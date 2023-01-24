@@ -26,6 +26,7 @@ namespace projekt_v4._0.Controllers
         public IActionResult Privacy()
         {
             return View();
+            // chodzmy na ryby 
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
