@@ -1,0 +1,197 @@
+﻿
+
+@{
+    ViewData["Title"] = "Porady";
+}
+@*<h1>@ViewData["Title"]</h1>
+
+<p>Tu będą porady dotyczące oszczędzania czasu.</p>*@
+
+
+<porady html>
+
+  <head>
+    <meta charset="utf-8">
+    <title> ToDoList Mobilny terminarz </title>
+    <link rel="stylesheet" href="style/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- link łączący bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+
+  <!--<body>-->
+    <!-- nagłówek strony -->
+    @*<nav class="navbar navbar-expand-lg bg-light sticky-top">
+      <div class="container-fluid"> <!--fluid płynne rozlanie się menu-->
+          <a class="navbar-brand" href="StronaGłówna.html"><span style="color:#990075 ;">ToDoList</span></a>
+        <!--data toggle =collapse chowamy i pojawia sie tylko po kliknięciu-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/StronaGłówna.html">Strona Główna </a>
+            </li>
+            <li class="nav-item">
+
+              <a class="nav-link" href="/porady.html">Porady</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ListaZadań.html">Lista Zadań</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>*@
+
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+
+        /* Add a gray background color with some padding */
+        body {
+          font-family: Arial;
+          padding: 0px;
+          background: #f1f1f1;
+        }
+
+        /* Header/Blog Title */
+          .header {
+              padding: 30px;
+              font-size: 40px;
+              text-align: center;
+              color: white;
+              background: rgb(221, 144, 217);
+          }
+
+        /* Create two unequal columns that floats next to each other */
+        /* Left column */
+        .leftcolumn {
+          float: left;
+          width: 75%;
+        }
+
+        /* Right column */
+        .rightcolumn {
+          float: left;
+          width: 25%;
+          padding-left: 20px;
+        }
+
+        /* Fake image */
+        .fakeimg {
+          background-color: #aaa;
+          width: 100%;
+          padding: 20px;
+        }
+
+        /* Add a card effect for articles */
+        .card {
+          background-color: white;
+          padding: 20px;
+          margin-top: 20px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        /* Footer */
+        .footer {
+          padding: 20px;
+          text-align: center;
+          background: #ddd;
+          margin-top: 20px;
+        }
+
+        /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+       @* @media screen and (max-width: 800px) {
+
+          .leftcolumn,
+          .rightcolumn {
+            width: 100%;
+            padding: 0;
+          }
+        }*@
+      </style>
+    </head>
+
+    <body>
+
+      <div class="header">
+        <h2>ToDoList</h2>
+      </div>
+
+      <div class="row">
+        <div class="leftcolumn">
+            <div class="card">
+                <h2>PORADY</h2>
+                <h5>Kilka prostych sposobów na dobre zarządzanie czasem.</h5>
+                <img src="~/img/kartki.jpg" alt="porady" style="width:100% ;height:auto;" /><br/>
+                <!-- <div class="fakeimg" style="height:200px;width: 100%; padding: 20px ">Image</div>-->
+                <p>
+                    Sprawdź na co tracisz czas - notuj wszystkie swoje aktywności
+                </p>
+                <p>
+                    Przeznacz tydzień na zbadanie tego na co przeznaczasz swój czas. Zacznij od zapisywania w dzienniczku
+                    wszystkich swoich aktywności, które miały miejsce w ciągu tego tygodnia, bez względu na to, czy to były
+                    rozmowy, analizy, pisanie raportów, czy samo myślenie nad zadaniem.
+                </p>
+            </div>
+            <div class="card">
+                <h2> PLANUJ I USTALAJ PRIORYTETY</h2>
+                <h5>To co ważne rzadko bywa pilne, a to co pilne rzadko bywa ważne.</h5>
+                <!--<div class="fakeimg" style="height:200px;">Zdjęcie</div>-->
+                <img src="~/img/notatki.jpg" alt="porady" style="width:100%; height:auto;" /><br/>
+
+                <p>
+                    Co powinno być ostatnią czynnością wykonaną w danym dniu? Zaplanowanie następnego dnia! Dzięki temu
+                    będziesz spać spokojnie, a odpowiednia ilość snu to podstawa wysokiej produktywności. Ale tak naprawdę
+                    plan można też zrobić na początku dnia ostatecznie liczy się, żeby przystępować do pracy mając go przed
+                    oczami.
+                </p>
+            </div>
+        </div>
+        <div class="rightcolumn">
+            <div class="card">
+                <h2>Jak ustalać priorytety?</h2>
+                <img src="~/img/macierz-eisenhowera-pelna2.png" alt="porady" style="width:100% ;height:auto; padding: 20px;"/>
+                <!--<div class="fakeimg" style="height:100px;">Zdjęcie</div>-->
+                <p>Podział zadań według Eisenhowera należy przeprowadzić według powyższego schematu</p>
+            </div>
+            <div class="card">
+                <h3>Cytat</h3>
+                <img src="~/img/stickers-banner.png" alt="porady" style="width:100% ;height:auto;" /><br/>
+                <p>"Nie mów, że nie masz wystarczająco dużo czasu. Masz dokładnie taką samą liczbę godzin w ciągu dnia, jaką mieli: Helen Keller, Louis Pasteur, Michał Anioł, matka Teresa, Leonardo da Vinci, Thomas Jefferson i Albert Einstein." ~ H. Jackson Brown</p>
+                <h5>Tylko od Ciebie zależy jak go wykorzystasz!</h5>
+                <!--<div class="fakeimg">zdjęcie</div><br>
+                <div class="fakeimg">zdjęcie</div><br>
+                <div class="fakeimg">zdjęcie</div>-->
+            </div>
+          <div class="card">
+            <h3>Powodzenia!</h3>
+            <p>Mamy nadzieje, że razem z nami łatwiej będzie Ci prowadzić Twój dzień :D </p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <div class="container">
+          <p>&copy;Mobilny Terminarz Natalia Szyszka & Aleksandra Niedziela</p>
+        </div>
+       </footer>
+
+    </body>
+
+</porady>

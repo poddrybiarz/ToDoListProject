@@ -1,0 +1,84 @@
+﻿@model projekt_v1._0.Models.ModelZadania
+
+@{
+    ViewData["Title"] = "Szczegóły zadania";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    if (Model.UserId == ViewBag.Id)
+    {
+
+    <h1><span style="color:#990075 ;">Szczegóły zadania</span></h1>
+
+    <div>
+
+                <hr />
+                <dl class="row">
+                    <dt class = "col-sm-2">
+                        @Html.DisplayNameFor(model => model.Data)
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.Data)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @Html.DisplayNameFor(model => model.Start)
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.Start)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @Html.DisplayNameFor(model => model.End)
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.End)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @Html.DisplayNameFor(model => model.Hour)
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.Hour)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    <dt class = "col-sm-2">
+                        @Html.DisplayNameFor(model => model.Done)
+                    </dt>
+                    <dd class = "col-sm-10">
+                        @Html.DisplayFor(model => model.Done)
+                    </dd>
+                    @* <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.Id)
+        </dd>*@
+                </dl>
+    </div>
+    <div>
+            <a asp-action="Edit" class="btn btn-danger" style="background:#890069;" asp-route-id="@Model?.ZadanieId">Edytuj</a> |
+            <a asp-action="Index"class="btn btn-danger" style="background:#990075;">Wróć do listy zadań</a>
+            </div>
+        }
+    }
+
+
+    @{
+    if (Model.UserId != ViewBag.Id || Model.UserId==null)
+    {
+                <h1><span style="color:red ;"><b>Oszukista!</b></span></h1>
+                <h3>Dlaczego próbujesz mnie oszukać?! To zadanie nie należy do Ciebie!!!</h3>
+                <br>
+                <img src="~/img/zly.png" style="max-height:250px" alt="zly" />
+    }
+    }

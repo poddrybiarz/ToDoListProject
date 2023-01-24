@@ -1,0 +1,546 @@
+﻿@model IEnumerable<projekt_v1._0.Models.ModelZadania>
+
+@{
+    ViewData["Title"] = "Lista zadań";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<ListaZadań html>
+    
+
+    <head>
+        <meta charset="utf-8">
+        <title> ToDoList Mobilny terminarz </title>
+        <link rel="stylesheet" href="style/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- link łączący bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+
+
+        <style>
+            .button {
+                position: relative;
+                background-color: #990075;
+                border: none;
+                font-size: 15px;
+                color: #FFFFFF;
+                padding: 5px;
+                width: 100px;
+                text-align: center;
+                -webkit-transition-duration: 0.4s; /* Safari */
+                transition-duration: 0.4s;
+                text-decoration: none;
+                overflow: hidden;
+                cursor: pointer;
+            }
+
+                .button:after {
+                    content: "";
+                    background: #990050;
+                    display: block;
+                    position: absolute;
+                    padding-top: 300%;
+                    padding-left: 350%;
+                    margin-left: -20px !important;
+                    margin-top: -120%;
+                    opacity: 0;
+                    transition: all 0.8s
+                }
+
+                .button:active:after {
+                    padding: 0;
+                    margin: 0;
+                    opacity: 1;
+                    transition: 0s
+                }
+
+                .button:hover {
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+                }
+
+                .button2{
+                width: 400px;
+                float:right;
+                padding: 10px;
+                }
+
+                .button3{
+                background-color: #4CAF50;
+                }
+
+                .button3:after {
+                    background: #4CAF39;
+                }
+
+                .button4{
+                background-color: #b20000;
+                }
+
+                .button4:after {
+                    background: #990000;
+                }
+
+
+
+
+                tr {
+                    cursor: pointer;
+                    position: relative;
+                    padding: 12px 8px 12px 40px;
+                    list-style-type: none;
+                    background: #EACCE3;
+                    font-size: 18px;
+                    transition: 0.2s;
+  
+                 /* make the list items unselectable */
+                  -webkit-user-select: none;
+                  -moz-user-select: none;
+                  -ms-user-select: none;
+                   user-select: none;
+                }
+
+                .tr1{
+                background: #990075;
+                color: #FFFFFF;
+                }
+
+            
+
+        </style>
+    </head>
+
+   
+        <section class="banner">
+            <div class="container text-center mt-5 mb-5" class="jumbotron">
+                <!--margines górny i dolny wielkość 5-->
+                <h1> Mobilny terminarz <span style="color:#990075 ;">ToDoList </span> </h1>
+            <!-- <p> Tutaj bedzie lista zadan https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_todo </p>-->
+            </div></section>
+
+
+
+
+
+
+
+
+
+
+    <h1><span style="color:#990075 ;">Lista zadań</span></h1>
+
+Wybierz dzień:
+@using (Html.BeginForm())
+{
+
+    <input type="date" name="data" value="@Convert.ToDateTime(ViewBag.Data).ToString("yyyy-MM-dd")" />
+        <button class="button">Prześlij</button>
+        <!-- <input type="submit" />-->
+}
+
+@*<p>
+       
+    <a asp-action="Create">Utwórz nowe zadanie</a>
+</p>*@
+    <button type="button" class="button button2" onclick="location.href='@Url.Action("Create", "ModelZadanias")'">
+        + Nowe zadanie</button><br/>
+
+
+   <h3><span style="color:#990075 ;">Terminarz</span></h3>
+
+@*TABELA Z ZADANIAMI PODZIELONE NA GODZINY*@
+
+
+<table class="table">
+    <thead>
+        <tr class="tr1">
+            @*<th>
+                @Html.DisplayNameFor(model => model.ZadanieId)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.End)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Done)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @{
+                    if (item.UserId == ViewBag.Id && item.Hour == true && item.Done == false && item.Data.Date == ViewBag.Data)
+                    {
+                                    @* <td>
+                            @Html.DisplayFor(modelItem => item.ZadanieId);
+                           </td> *@
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Start)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.End)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        <button type="button" class="button button4" onclick="location.href='@Url.Action("Done", "ModelZadanias", new { id=item.ZadanieId })'">Do zrobienia</button>                                @* <input type="checkbox" id="item.ZadanieId" name="item.Name" value="item.Done">   <- nicnierobiący checkbox*@
+                                    </td>
+                                    <td>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Edit", "ModelZadanias", new { id=item.ZadanieId })'">Edytuj</button>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Details", "ModelZadanias", new { id=item.ZadanieId })'">Szczegóły</button>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Delete", "ModelZadanias", new { id=item.ZadanieId })'">Usuń</button>
+
+                                        @*@Html.ActionLink("Gotowe", "Done", new { id=item.ZadanieId }) |
+                                 @Html.ActionLink("Edytuj", "Edit", new { id=item.ZadanieId }) |
+                                 @Html.ActionLink("Szczegóły", "Details", new {  id=item.ZadanieId }) |
+                                 @Html.ActionLink("Usuń", "Delete", new { id=item.ZadanieId })*@
+                                    </td>
+                    }
+                }
+            </tr>
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @{
+                    if (item.UserId == ViewBag.Id && item.Hour == true && item.Done == true && item.Data.Date == ViewBag.Data)
+                    {
+                                    @* <td>
+                            @Html.DisplayFor(modelItem => item.ZadanieId);
+                           </td> *@
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Start)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.End)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        <button type="button" class="button button3" onclick="location.href='@Url.Action("Done", "ModelZadanias", new { id=item.ZadanieId })'">Gotowe</button>
+                                        @* <input type="checkbox" id="item.ZadanieId" name="item.Name" value="item.Done">   <- nicnierobiący checkbox*@
+                                    </td>
+                                    <td>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Edit", "ModelZadanias", new { id=item.ZadanieId })'">Edytuj</button>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Details", "ModelZadanias", new { id=item.ZadanieId })'">Szczegóły</button>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Delete", "ModelZadanias", new { id=item.ZadanieId })'">Usuń</button>
+
+                                        @*@Html.ActionLink("Niegotowe", "Done", new { id=item.ZadanieId }) |
+                                  @Html.ActionLink("Edytuj", "Edit", new { id=item.ZadanieId }) |
+                                  @Html.ActionLink("Szczegóły", "Details", new {  id=item.ZadanieId }) |
+                                  @Html.ActionLink("Usuń", "Delete", new { id=item.ZadanieId })*@
+                                    </td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@*TABELA Z ZADANIAMI NIEPODZIELONE NA GODZINY*@
+
+    <h3><span style="color:#990075 ;">W międzyczasie</span></h3>
+
+<table class="table">
+    <thead>
+        <tr class="tr1">
+            @*<th>
+                @Html.DisplayNameFor(model => model.ZadanieId)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Done)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @{
+                    if (item.UserId == ViewBag.Id && item.Hour == false && item.Done == false && item.Data.Date == ViewBag.Data)
+                    {
+                                    @* <td>
+                             @Html.DisplayFor(modelItem => item.ZadanieId);
+                           </td> *@
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        <button type="button" class="button button4" onclick="location.href='@Url.Action("Done", "ModelZadanias", new { id=item.ZadanieId })'">Do zrobienia</button>
+                                        @* <input type="checkbox" id="item.ZadanieId" name="item.Name" value="item.Done">   <- nicnierobiący checkbox*@
+                                    </td>
+                                    <td>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Edit", "ModelZadanias", new { id=item.ZadanieId })'">Edytuj</button>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Details", "ModelZadanias", new { id=item.ZadanieId })'">Szczegóły</button>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Delete", "ModelZadanias", new { id=item.ZadanieId })'">Usuń</button>
+                                        
+                                        @*@Html.ActionLink("Gotowe", "Done", new { id=item.ZadanieId }) |
+                                @Html.ActionLink("Edytuj", "Edit", new { id=item.ZadanieId }) |
+                                @Html.ActionLink("Szczegóły", "Details", new {  id=item.ZadanieId }) |
+                                @Html.ActionLink("Usuń", "Delete", new { id=item.ZadanieId })*@
+                                    </td>
+                    }
+                }
+            </tr>
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @{
+                    if (item.UserId == ViewBag.Id && item.Hour == false && item.Done == true && item.Data.Date == ViewBag.Data)
+                    {
+                                   @* <td>
+                            @Html.DisplayFor(modelItem => item.ZadanieId);
+                        </td>
+                        *@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        <button type="button" class="button button3" onclick="location.href='@Url.Action("Done", "ModelZadanias", new { id=item.ZadanieId })'">Gotowe</button>
+                                        @* <input type="checkbox" id="item.ZadanieId" name="item.Name" value="item.Done">   <- nicnierobiący checkbox*@
+                                    </td>
+                                    <td>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Edit", "ModelZadanias", new { id=item.ZadanieId })'">Edytuj</button>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Details", "ModelZadanias", new { id=item.ZadanieId })'">Szczegóły</button>
+                                        <button type="button" class="button" onclick="location.href='@Url.Action("Delete", "ModelZadanias", new { id=item.ZadanieId })'">Usuń</button>
+
+                                        @*@Html.ActionLink("Niegotowe", "Done", new { id=item.ZadanieId }) |
+                                  @Html.ActionLink("Edytuj", "Edit", new { id=item.ZadanieId }) |
+                                  @Html.ActionLink("Szczegóły", "Details", new {  id=item.ZadanieId }) |
+                                  @Html.ActionLink("Usuń", "Delete", new { id=item.ZadanieId })*@
+                                    </td>
+                    }
+                }
+            </tr>
+        } </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+</ListaZadań>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @*<table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Start)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.End)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Hour)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Done)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+            <tr>
+                @{
+                    if (item.Hour == false && item.Done == false && item.Data.Date == ViewBag.Data)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Start)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.End)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hour)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Done)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Id)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ZadanieId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ZadanieId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ZadanieId">Delete</a>
+                        </td>
+                    }
+                }
+                    </tr>
+                }
+              </tbody>
+</table>*@
+
+
+
+
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.End)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Done)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Done)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ZadanieId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ZadanieId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ZadanieId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@

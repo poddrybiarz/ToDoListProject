@@ -1,0 +1,74 @@
+﻿@model projekt_v1._0.Models.ModelZadania
+
+
+@{
+    ViewData["Title"] = "Stwórz zadanie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Stwórz zadanie</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" type="date"/>
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Hour" checked/> @Html.DisplayNameFor(model => model.Hour)
+                </label>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="Start" class="control-label"></label>
+                <input asp-for="Start" class="form-control" type="time" />
+                <span asp-validation-for="Start" class="text-danger"></span>
+            </div>
+            <div class="form-group" >
+                <label asp-for="End" class="control-label"></label>
+                <input asp-for="End" class="form-control" type="time" />
+                <span asp-validation-for="End" class="text-danger"></span>
+            </div>
+               
+            
+        
+            
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label" hidden></label>
+                <input asp-for="UserId" class="form-control" value="@Convert.ToString(ViewBag.Id)" hidden/>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-warning text-uppercase px-5" style="background:#890069; color:white;" onclick="location.href='@Url.Action("Index", "ModelZadanias")'">Utwórz</button>
+                <button type="button" class="btn btn-warning text-uppercase px-5" style="background:#990075; color:white;" onclick="location.href='@Url.Action("Index", "ModelZadanias")'">Wróć do listy zadań</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

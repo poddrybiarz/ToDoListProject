@@ -1,0 +1,12 @@
+.card img{
+	max-width: 100px !important;
+}
+.btn-warning{
+	background: #990075  !important;
+	border-color: hsl(140, 23%, 39%) !important;
+	color: white !important;
+}
+.navbar-brand{
+	color: #4c7a5b !important;
+}
+

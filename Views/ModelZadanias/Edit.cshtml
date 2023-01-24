@@ -1,0 +1,88 @@
+﻿@model projekt_v1._0.Models.ModelZadania
+
+@{
+    ViewData["Title"] = "Edytuj zadanie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    if (Model.UserId == ViewBag.Id)
+    {
+
+     <h1><span style="color:#990075 ;">Edytuj zadanie</span></h1>
+
+     <hr />
+     <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ZadanieId" />
+
+
+                <div class="form-group">
+                    <label asp-for="Data" class="control-label"></label>
+                    <input asp-for="Data" class="form-control" type="date" />
+                    <span asp-validation-for="Data" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Hour" /> @Html.DisplayNameFor(model => model.Hour)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Start" class="control-label"></label>
+                    <input asp-for="Start" class="form-control" type="time" />
+                    <span asp-validation-for="Start" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="End" class="control-label"></label>
+                    <input asp-for="End" class="form-control" type="time" />
+                    <span asp-validation-for="End" class="text-danger"></span>
+                </div>
+               
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserId" class="control-label" hidden></label>
+                    <input asp-for="UserId" class="form-control" value="@Convert.ToString(ViewBag.Id)" hidden/>
+                </div>
+                <br/>
+                <div class="form-group">
+                        <input type="submit" value="Zapisz" class="btn btn-danger" style="background:#890069;" />
+                </div>
+
+
+            </form>
+        </div>
+     </div>
+     <br/>
+     <div>
+            <a asp-action="Index" class="btn btn-danger" style="background:#990075;">Wróć do listy</a>
+     </div>
+
+    @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+    }
+}
+
+@{
+    if (Model.UserId != ViewBag.Id || Model.UserId == null)
+    {
+        <h1><span style="color:red ;"><b>Oszukista!</b></span></h1>
+        <h3>Dlaczego próbujesz mnie oszukać?! To zadanie nie należy do Ciebie!!!</h3>
+        <br>
+        <img src="~/img/zly.png" style="max-height:250px" alt="zly" />
+    }
+}

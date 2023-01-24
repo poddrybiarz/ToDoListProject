@@ -1,0 +1,15 @@
+﻿@inject SignInManager<User> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="nav nav-pills flex-column">
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" style="background:#EACCE3; color:#990075" id="profile" asp-page="./Index">Profil</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" style="background:#EACCE3; color:#990075" id="email" asp-page="./Email">Email</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" style="background:#EACCE3; color:#990075" id="change-password" asp-page="./ChangePassword">Hasło</a></li>
+   @* @if (hasExternalLogins)
+    {
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" style="background:#EACCE3; color:#990075" asp-page="./ExternalLogins">Logowanie zewnętrzne</a></li>
+    }
+    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" style="background:#EACCE3; color:#990075" id="two-factor" asp-page="./TwoFactorAuthentication">Uwierzytelnianie dwuskładnikowe</a></li>*@
+    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" style="background:#EACCE3; color:#990075" id="personal-data" asp-page="./PersonalData">Dane osobiste</a></li>
+</ul>
